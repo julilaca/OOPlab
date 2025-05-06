@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1746525513 source:c:\users\julia\onedrive\documents\visual studio 2022\lab8\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<map>
+	<queue>
+	<cctype>
+

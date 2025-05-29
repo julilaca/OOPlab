@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="LAB2EXTRA" />
+		<Option execution_dir="C:/Users/julia/OneDrive/Documents/Visual Studio 2022/LAB2EXTRA/" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/LAB2EXTRA" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/LAB2EXTRA" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="../../Documents/Visual Studio 2022/LAB2EXTRA/Moviecompare.cpp" />
+		<Unit filename="../../Documents/Visual Studio 2022/LAB2EXTRA/Moviecompare.h" />
+		<Unit filename="../../Documents/Visual Studio 2022/LAB2EXTRA/Movieseries.cpp" />
+		<Unit filename="../../Documents/Visual Studio 2022/LAB2EXTRA/main.cpp" />
+		<Unit filename="../../Documents/Visual Studio 2022/LAB2EXTRA/movie.cpp" />
+		<Unit filename="../../Documents/Visual Studio 2022/LAB2EXTRA/movie.h" />
+		<Unit filename="../../Documents/Visual Studio 2022/LAB2EXTRA/movieseries.h" />
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

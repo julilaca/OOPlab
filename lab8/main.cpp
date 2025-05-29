@@ -5,9 +5,11 @@
 #include <queue>
 #include <cctype>
 
-std::vector<std::string> splitString(const std::string& str) {
-    std::vector<std::string> words;
-    std::string current;
+using namespace std;
+
+vector<string> splitString(const string& str) {
+    vector<string> words;
+    string current;
     for (char ch : str) {
         if (isspace(ch) || ch == ',' || ch == '?' || ch == '!' || ch == '.') {
             if (!current.empty()) {
@@ -23,28 +25,28 @@ std::vector<std::string> splitString(const std::string& str) {
 }
 
 struct Comparator {
-    bool operator()(const std::pair<std::string, int>& a, const std::pair<std::string, int>& b) {
+    bool operator()(const pair<string, int>& a, const pair<string, int>& b) {
         if (a.second != b.second) return a.second < b.second;
         return a.first > b.first;
     }
 };
 
 int main() {
-    std::ifstream file("textfile.txt");
-    std::string phrase;
+    ifstream file("textfile.txt");
+    string phrase;
     getline(file, phrase);
     file.close();
 
-    std::vector<std::string> words = splitString(phrase);
-    std::map<std::string, int> counts;
+    vector<string> words = splitString(phrase);
+    map<string, int> counts;
     for (const auto& word : words) counts[word]++;
 
-    std::priority_queue<std::pair<std::string, int>, std::vector<std::pair<std::string, int>>, Comparator> pq;
+    priority_queue<pair<string, int>, vector<pair<string, int>>, Comparator> pq;
     for (const auto& pair : counts) pq.push(pair);
 
     while (!pq.empty()) {
         auto top = pq.top();
-        std::cout << top.first << " => " << top.second << std::endl;
+        cout << top.first << " => " << top.second << endl;
         pq.pop();
     }
 }

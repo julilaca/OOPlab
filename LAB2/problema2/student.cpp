@@ -43,7 +43,13 @@ float Student::getAverageGrade() const {
 }
 
 int compareByName(const Student& s1, const Student& s2) {
-    return s1.getName().compare(s2.getName());
+    if (s1.getName() == s2.getName()) {
+        return 0;
+    } else if (s1.getName() > s2.getName()) {
+        return 1;
+    } else {
+        return -1;
+    }
 }
 
 int compareByMathGrade(const Student& s1, const Student& s2) {

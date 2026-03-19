@@ -1,7 +1,7 @@
 #include "Movie.h"
 #include <cstring>
 #include <ctime>
-#include <stdexcept>
+
 
 void Movie::set_name(const std::string& n) {
     strncpy(name, n.c_str(), sizeof(name) - 1);
@@ -21,8 +21,9 @@ int Movie::get_year() const {
 }
 
 void Movie::set_score(double s) {
-    if (s < 1.0 || s > 10.0) throw std::out_of_range("Score must be between 1 and 10.");
-    score = s;
+    if (s >= 1.0 && s <= 10.0) {
+        score = s;
+    }
 }
 
 double Movie::get_score() const {

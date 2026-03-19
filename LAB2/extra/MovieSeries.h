@@ -12,7 +12,7 @@ public:
     void init();
     void add(Movie* movie);
     void print() const;
-    void sort(); // sort descending by passed years
+    void sort(); 
 };
 
 #endif

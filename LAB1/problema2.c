@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
 #define MAX_WORDS 100
 #define MAX_LEN 50
 
@@ -9,7 +8,7 @@ int compare(const void *a, const void *b) {
     char *word1 = *(char **)a;
     char *word2 = *(char **)b;
     int len1 = strlen(word1), len2 = strlen(word2);
-
+    
     if (len1 != len2) {
         return len2 - len1;
     }
@@ -21,7 +20,7 @@ int main() {
     char *words[MAX_WORDS];
     int count = 0;
 
-    fgets(input, sizeof(input), stdin);
+    scanf("%[^\n]", input);
 
     char *token = strtok(input, " \n");
     while (token != NULL && count < MAX_WORDS) {

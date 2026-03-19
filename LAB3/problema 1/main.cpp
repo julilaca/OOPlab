@@ -15,7 +15,7 @@ int main() {
     cout << "Mul(2.5, 3.5, 4.5) = " << Math::Mul(2.5, 3.5, 4.5) << endl;
 
     cout << "Add(5, 1, 2, 3, 4, 5) = " << Math::Add(5, 1, 2, 3, 4, 5) << endl;
-    cout << "Add of both string : " << Math::Add("Buna", "Zuia") << endl;
+    cout << "Add of both string : " << Math::Add("good", "day") << endl;
 
     return 0;
 }

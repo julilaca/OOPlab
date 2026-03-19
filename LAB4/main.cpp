@@ -4,35 +4,28 @@
 using namespace std;
 
 int main() {
-    Sort s1(10, 2, 89);
+    Sort s1(10, 1, 100);
     s1.Print();
 
-    Sort s2({ 15, 2, 9, 1, 62 });
+    Sort s2({5, 3, 8, 1, 2});
     s2.Print();
 
-    int arr[] = { 3, 7, 4, 81, 2 };
+    int arr[] = {9, 7, 5, 11, 12};
     Sort s3(arr, 5);
     s3.Print();
-
-    Sort s4(6, 11, 25, 3, 8, 19, 42);
+    
+    Sort s4(5, 10, 20, 30, 40, 50);
     s4.Print();
-
-    Sort s5("10,40,93,5,70");
+    Sort s5("10,40,100,5,70");
     s5.Print();
 
-    cout << "\n";
 
-    cout << "BubbleSort ascendent: ";
-    s1.BubbleSort(true);
+    s1.InsertSort(true);
     s1.Print();
-
-    cout << "InsertSort ascendent: ";
-    s2.InsertSort(true);
+    s2.QuickSort(false);
     s2.Print();
-
-    cout << "QuickSort descendent: ";
-    s5.QuickSort(false);
-    s5.Print();
+    s3.BubbleSort(true);
+    s3.Print();
 
     return 0;
 }

@@ -1,7 +1,7 @@
 #ifndef MOVIE_H
 #define MOVIE_H
-
 #include <string>
+using namespace std; 
 
 class Movie {
 private:
@@ -11,8 +11,8 @@ private:
     int length;
 
 public:
-    void set_name(const std::string& n);
-    std::string get_name() const;
+    void set_name(const string& n);
+    string get_name() const;
 
     void set_year(int y);
     int get_year() const;

@@ -1,6 +1,6 @@
 #include "MovieSeries.h"
 #include <iostream>
-#include <algorithm>
+using namespace std;
 
 void MovieSeries::init() {
     count = 0;
@@ -14,17 +14,19 @@ void MovieSeries::add(Movie* movie) {
 
 void MovieSeries::print() const {
     for (int i = 0; i < count; ++i) {
-        std::cout << movies[i]->get_name() << " | "
-                  << "Year: " << movies[i]->get_year() << " | "
-                  << "Score: " << movies[i]->get_score() << " | "
-                  << "Length: " << movies[i]->get_length() << "min | "
-                  << "Passed Years: " << movies[i]->get_passed_years()
-                  << std::endl;
+        cout << movies[i]->get_name() << " " << movies[i]->get_year() << " " 
+<< movies[i]->get_score() << " "  << movies[i]->get_length() << " " << movies[i]->get_passed_years() << endl;
     }
 }
 
 void MovieSeries::sort() {
-    std::sort(movies, movies + count, [](Movie* a, Movie* b) {
-        return a->get_passed_years() > b->get_passed_years();
-    });
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = i + 1; j < count; j++) {
+            if (movies[i]->get_passed_years() < movies[j]->get_passed_years()) {
+                Movie* temp = movies[i];
+                movies[i] = movies[j];
+                movies[j] = temp;
+            }
+        }
+    }
 }

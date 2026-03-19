@@ -2,7 +2,7 @@
 #include "Canvas.h"
 #include <iostream>
 
-int main() {
+ int main() {
     std::cout << "Add(2, 3): " << Math::Add(2, 3) << '\n';
     std::cout << "Add(2, 3, 4): " << Math::Add(2, 3, 4) << '\n';
     std::cout << "Add(2.5, 3.5): " << Math::Add(2.5, 3.5) << '\n';

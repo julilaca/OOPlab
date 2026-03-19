@@ -7,29 +7,25 @@ Number::Number(const char* value, int base) : base(base)
 {
     this->value = new char[strlen(value) + 1];
     strcpy(this->value, value);
-    UpdateDecimal();
-}
+    UpdateDecimal(); }
 
 Number::~Number()
 {
-    delete[] value;
-}
+    delete[] value; }
 
 Number::Number(const Number& other)
 {
     base = other.base;
     decimalValue = other.decimalValue;
     value = new char[strlen(other.value) + 1];
-    strcpy(value, other.value);
-}
+    strcpy(value, other.value); }
 
 Number::Number(Number&& other) noexcept
 {
     base = other.base;
     decimalValue = other.decimalValue;
     value = other.value;
-    other.value = nullptr;
-}
+    other.value = nullptr; }
 
 Number& Number::operator=(const Number& other)
 {
@@ -43,7 +39,6 @@ Number& Number::operator=(const Number& other)
     }
     return *this;
 }
-
 Number& Number::operator=(Number&& other) noexcept
 {
     if (this != &other)

@@ -17,18 +17,17 @@ int main() {
     ep4.set_length(121);
 
     Movie ep6;
-    ep6.set_name("Star Wars: Episode VI - Return of the Jedi");
+    ep6.set_name(" Star Wars: Episode VI - Return of the Jedi");
     ep6.set_score(8.3);
     ep6.set_year(1983);
     ep6.set_length(131);
 
     printf(
-          R"(
-ep4, ep5 comparisons:
-name        : %d
-year        : %d
-score       : %d
-length      : %d
+          R"(ep4, ep5 comparisons:
+name : %d
+year: %d
+score : %d
+length : %d
 passed years: %d
 )",
           movie_compare_name(ep4, ep5),

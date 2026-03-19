@@ -1,7 +1,6 @@
 #include "Math.h"
 #include <cstdarg>
 #include <cstring>
-#include <iostream>
 
 int Math::Add(int x, int y) {
     return x + y;

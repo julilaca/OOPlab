@@ -9,13 +9,10 @@ int main() {
     list.Add(3);
     list.Add(8);
     list.Add(1);
-
-    std::cout << "Before sorting: ";
     list.Print();
-
     list.Sort();
 
-    std::cout << "After sorting: ";
+    std::cout << "after sorting:";
     list.Print();
 
     return 0;

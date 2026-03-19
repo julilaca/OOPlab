@@ -1,29 +1,29 @@
 #include "Sort.h"
 #include <iostream>
-#include <cstdlib>
-#include <ctime>
 #include <cstdarg>
-#include <algorithm>
-#include <cstring>
+#include <ctime>
+#include <sstream>
+#include <vector>
 
 using namespace std;
 
 Sort::Sort(int count, int min, int max) {
-    srand(time(nullptr));
+    srand(time(0));
     for (int i = 0; i < count; i++) {
         v.push_back(min + rand() % (max - min + 1));
     }
 }
 
-Sort::Sort(std::initializer_list<int> l) {
-    for (int elem : l) {
-        v.push_back(elem);
+Sort::Sort(initializer_list<int> l) {
+    const int* it = l.begin();
+    for (int i = 0; i < static_cast<int>(l.size()); i++) {
+        v.push_back(it[i]);
     }
 }
 
-Sort::Sort(int* vector, int count) {
+Sort::Sort(int* arr, int count) {
     for (int i = 0; i < count; i++) {
-        v.push_back(vector[i]);
+        v.push_back(arr[i]);
     }
 }
 
@@ -37,17 +37,18 @@ Sort::Sort(int count, ...) {
 }
 
 Sort::Sort(const char* str) {
-    char* strCopy = strdup(str);
-    char* token = strtok(strCopy, ",");
-    while (token != nullptr) {
-        v.push_back(stoi(token));
-        token = strtok(nullptr, ",");
+    stringstream ss(str);
+    int num;
+    char ch;
+    while (ss >> num) {
+        v.push_back(num);
+        ss >> ch;
     }
-    free(strCopy);
 }
 
 void Sort::InsertSort(bool ascendent) {
-    for (size_t i = 1; i < v.size(); i++) {
+    int n = static_cast<int>(v.size());
+    for (int i = 1; i < n; i++) {
         int key = v[i];
         int j = i - 1;
         while (j >= 0 && (ascendent ? v[j] > key : v[j] < key)) {
@@ -59,57 +60,50 @@ void Sort::InsertSort(bool ascendent) {
 }
 
 void Sort::BubbleSort(bool ascendent) {
-    bool swapped;
-    for (size_t i = 0; i < v.size() - 1; i++) {
-        swapped = false;
-        for (size_t j = 0; j < v.size() - i - 1; j++) {
-            if ((ascendent && v[j] > v[j + 1]) || (!ascendent && v[j] < v[j + 1])) {
+    int n = static_cast<int>(v.size());
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (ascendent ? v[j] > v[j + 1] : v[j] < v[j + 1]) {
                 swap(v[j], v[j + 1]);
-                swapped = true;
             }
         }
-        if (!swapped) break;
     }
 }
 
-int Partition(vector<int>& v, int low, int high, bool ascendent) {
-    int pivot = v[high];
-    int i = low - 1;
+void qSort(vector<int>& vec, int low, int high, bool asc) {
+    if (low >= high) return;
+    int pivot = vec[high], i = low;
     for (int j = low; j < high; j++) {
-        if ((ascendent && v[j] < pivot) || (!ascendent && v[j] > pivot)) {
+        if (asc ? vec[j] < pivot : vec[j] > pivot) {
+            swap(vec[i], vec[j]);
             i++;
-            swap(v[i], v[j]);
         }
     }
-    swap(v[i + 1], v[high]);
-    return i + 1;
-}
-
-void QuickSortHelper(vector<int>& v, int low, int high, bool ascendent) {
-    if (low < high) {
-        int p = Partition(v, low, high, ascendent);
-        QuickSortHelper(v, low, p - 1, ascendent);
-        QuickSortHelper(v, p + 1, high, ascendent);
-    }
+    swap(vec[i], vec[high]);
+    qSort(vec, low, i - 1, asc);
+    qSort(vec, i + 1, high, asc);
 }
 
 void Sort::QuickSort(bool ascendent) {
-    QuickSortHelper(v, 0, v.size() - 1, ascendent);
+    if (v.size() > 0) {
+        qSort(v, 0, static_cast<int>(v.size()) - 1, ascendent);
+    }
 }
 
 void Sort::Print() {
-    for (int elem : v) {
-        cout << elem << ' ';
+    int n = static_cast<int>(v.size());
+    for (int i = 0; i < n; i++) {
+        cout << v[i] << " ";
     }
     cout << endl;
 }
 
 int Sort::GetElementsCount() {
-    return v.size();
+    return static_cast<int>(v.size());
 }
 
 int Sort::GetElementFromIndex(int index) {
-    if (index >= 0 && index < v.size()) {
+    if (index >= 0 && index < static_cast<int>(v.size())) {
         return v[index];
     }
     return -1;

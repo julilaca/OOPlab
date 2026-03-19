@@ -11,7 +11,7 @@ private:
 public:
     void init();
     void add(Movie* movie);
-    void print() const;
+    void print();
     void sort(); 
 };
 

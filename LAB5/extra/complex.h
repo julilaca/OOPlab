@@ -11,12 +11,12 @@ class Complex {
     Complex();
     Complex(double real, double imag);
 
-    bool is_real() const;
+    bool is_real() const; 
 
-    double real() const;
-    double imag() const;
-    double abs() const;
-    Complex conjugate() const;
+    double real() const; 
+    double imag() const; 
+    double abs() const; 
+    Complex conjugate() const; 
 
     Complex& operator()(double real, double imag);
 
@@ -32,9 +32,9 @@ Complex operator+(double l, const Complex& r);
 
 Complex operator-(const Complex& obj);
 
-bool operator==(const Complex& l, const Complex& r);
+bool operator==(const Complex& l, const Complex& r); 
 
-std::ostream& operator<<(std::ostream& out, const Complex& complex);
+std::ostream& operator<<(std::ostream& out, const Complex& complex); 
 
 Complex operator-(const Complex& l, const Complex& r);
 Complex operator-(const Complex& l, double r);

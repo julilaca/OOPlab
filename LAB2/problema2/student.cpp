@@ -1,30 +1,27 @@
 #include "Student.h"
 
-void Student::setName(const std::string& newName) {
+void Student::setName(std::string newName) {
     name = newName;
 }
 
-std::string Student::getName() const {
-    return name;
-}
+std::string Student::getName() {
+    return name; }
 
 void Student::setMathGrade(float grade) {
     if (grade >= 1.0f && grade <= 10.0f) {
         mathGrade = grade;
     }
 }
-
-float Student::getMathGrade() const {
+float Student::getMathGrade() {
     return mathGrade;
 }
-
 void Student::setEnglishGrade(float grade) {
     if (grade >= 1.0f && grade <= 10.0f) {
         englishGrade = grade;
     }
 }
 
-float Student::getEnglishGrade() const {
+float Student::getEnglishGrade() {
     return englishGrade;
 }
 
@@ -34,15 +31,15 @@ void Student::setHistoryGrade(float grade) {
     }
 }
 
-float Student::getHistoryGrade() const {
+float Student::getHistoryGrade() {
     return historyGrade;
 }
 
-float Student::getAverageGrade() const {
+float Student::getAverageGrade() {
     return (mathGrade + englishGrade + historyGrade) / 3.0f;
 }
 
-int compareByName(const Student& s1, const Student& s2) {
+int compareByName(Student& s1, Student& s2) {
     if (s1.getName() == s2.getName()) {
         return 0;
     } else if (s1.getName() > s2.getName()) {
@@ -52,27 +49,26 @@ int compareByName(const Student& s1, const Student& s2) {
     }
 }
 
-int compareByMathGrade(const Student& s1, const Student& s2) {
+int compareByMathGrade(Student& s1, Student& s2) {
     if (s1.getMathGrade() > s2.getMathGrade()) return 1;
     if (s1.getMathGrade() < s2.getMathGrade()) return -1;
     return 0;
 }
 
-int compareByEnglishGrade(const Student& s1, const Student& s2) {
+int compareByEnglishGrade(Student& s1, Student& s2) {
     if (s1.getEnglishGrade() > s2.getEnglishGrade()) return 1;
     if (s1.getEnglishGrade() < s2.getEnglishGrade()) return -1;
     return 0;
 }
 
-int compareByHistoryGrade(const Student& s1, const Student& s2) {
+int compareByHistoryGrade(Student& s1, Student& s2) {
     if (s1.getHistoryGrade() > s2.getHistoryGrade()) return 1;
     if (s1.getHistoryGrade() < s2.getHistoryGrade()) return -1;
     return 0;
 }
 
-int compareByAverageGrade(const Student& s1, const Student& s2) {
+int compareByAverageGrade(Student& s1, Student& s2) {
     if (s1.getAverageGrade() > s2.getAverageGrade()) return 1;
     if (s1.getAverageGrade() < s2.getAverageGrade()) return -1;
     return 0;
 }
-

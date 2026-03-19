@@ -11,7 +11,7 @@ Complex::Complex(double real, double imag) {
 }
 
 bool Complex::is_real() const {
-    return imag() == 0;
+    return imag_data == 0;
 }
 
 double Complex::real() const {
@@ -23,11 +23,11 @@ double Complex::imag() const {
 }
 
 double Complex::abs() const {
-    return sqrt(real() * real() + imag() * imag());
+    return sqrt(real_data * real_data + imag_data * imag_data);
 }
 
 Complex Complex::conjugate() const {
-    return { real(), -imag() };
+    return { real_data, -imag_data };
 }
 
 Complex& Complex::operator()(double real, double imag) {
@@ -45,7 +45,7 @@ Complex operator+(const Complex& l, double r) {
 }
 
 Complex operator+(double l, const Complex& r) {
-    return r + l;
+    return { r.real() + l, r.imag() };
 }
 
 Complex operator-(const Complex& l, const Complex& r) {
@@ -72,7 +72,7 @@ Complex operator*(const Complex& l, double r) {
 }
 
 Complex operator*(double l, const Complex& r) {
-    return r * l;
+    return { r.real() * l, r.imag() * l };
 }
 
 Complex operator-(const Complex& obj) {
@@ -119,10 +119,8 @@ std::ostream& operator<<(std::ostream& out, const Complex& c) {
         out << c.real();
     } else if (!has_real && has_imag) {
         out << c.imag() << "i";
-    } else {
-        out << c.real() << (c.imag() >= 0 ? " + " : " - ") << std::abs(c.imag()) << "i";
+    } else {   out << c.real() << (c.imag() >= 0 ? " + " : " - ") << std::abs(c.imag()) << "i";
     }
 
     return out;
 }
-

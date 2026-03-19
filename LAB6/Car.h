@@ -12,21 +12,15 @@ protected:
 
 public:
     virtual ~Car() = default;
+
     virtual double GetFuelCapacity() const = 0;
     virtual double GetFuelConsumption() const = 0;
     virtual double GetAverageSpeed(Weather weather) const = 0;
     virtual const char* GetName() const = 0;
 
-    double GetCurrentFuel() const { return currentFuel; }
-    void SetCurrentFuel(double fuel) { currentFuel = fuel; }
+    double GetCurrentFuel() const;
+    void SetCurrentFuel(double fuel);
 
-    bool CanFinish(double circuitLength) const {
-        double fuelNeeded = (circuitLength / 100) * fuelConsumption;
-        return currentFuel >= fuelNeeded;
-    }
-
-    double CalculateTime(double circuitLength, Weather weather) const {
-        double speed = GetAverageSpeed(weather);
-        return circuitLength / speed;
-    }
+    bool CanFinish(double circuitLength) const;
+    double CalculateTime(double circuitLength, Weather weather) const;
 };

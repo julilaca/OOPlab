@@ -11,26 +11,25 @@ private:
     float historyGrade;
 
 public:
-    void setName(const std::string& newName);
-    std::string getName() const;
+    void setName(std::string newName);
+    std::string getName();
 
     void setMathGrade(float grade);
-    float getMathGrade() const;
+    float getMathGrade();
 
     void setEnglishGrade(float grade);
-    float getEnglishGrade() const;
+    float getEnglishGrade();
 
     void setHistoryGrade(float grade);
-    float getHistoryGrade() const;
+    float getHistoryGrade();
 
-    float getAverageGrade() const;
+    float getAverageGrade();
 };
 
-int compareByName(const Student& s1, const Student& s2);
-int compareByMathGrade(const Student& s1, const Student& s2);
-int compareByEnglishGrade(const Student& s1, const Student& s2);
-int compareByHistoryGrade(const Student& s1, const Student& s2);
-int compareByAverageGrade(const Student& s1, const Student& s2);
+int compareByName(Student& s1, Student& s2);
+int compareByMathGrade(Student& s1, Student& s2);
+int compareByEnglishGrade(Student& s1, Student& s2);
+int compareByHistoryGrade(Student& s1, Student& s2);
+int compareByAverageGrade(Student& s1, Student& s2);
 
 #endif
-

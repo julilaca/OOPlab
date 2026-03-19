@@ -12,10 +12,11 @@ void MovieSeries::add(Movie* movie) {
     }
 }
 
-void MovieSeries::print() const {
+void MovieSeries::print() {
     for (int i = 0; i < count; ++i) {
         cout << movies[i]->get_name() << " " << movies[i]->get_year() << " " 
-<< movies[i]->get_score() << " "  << movies[i]->get_length() << " " << movies[i]->get_passed_years() << endl;
+             << movies[i]->get_score() << " "  << movies[i]->get_length() << " " 
+             << movies[i]->get_passed_years() << endl;
     }
 }
 

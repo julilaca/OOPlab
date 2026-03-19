@@ -12,18 +12,18 @@ private:
 
 public:
     void set_name(const string& n);
-    string get_name() const;
+    string get_name();
 
     void set_year(int y);
-    int get_year() const;
+    int get_year();
 
     void set_score(double s);
-    double get_score() const;
+    double get_score();
 
     void set_length(int l);
-    int get_length() const;
+    int get_length();
 
-    int get_passed_years() const;
+    int get_passed_years();
 };
 
 #endif

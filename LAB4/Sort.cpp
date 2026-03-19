@@ -1,110 +1,105 @@
 #include "Sort.h"
 #include <iostream>
-#include <cstdarg>
+#include <algorithm>
+#include <cstdlib>
 #include <ctime>
-#include <sstream>
-#include <vector>
-
-using namespace std;
+#include <sstream> 
 
 Sort::Sort(int count, int min, int max) {
     srand(time(0));
-    for (int i = 0; i < count; i++) {
-        v.push_back(min + rand() % (max - min + 1));
+    for (int i = 0; i < count; ++i) {
+        elements.push_back(min + rand() % (max - min + 1));
     }
 }
 
-Sort::Sort(initializer_list<int> l) {
-    const int* it = l.begin();
-    for (int i = 0; i < static_cast<int>(l.size()); i++) {
-        v.push_back(it[i]);
-    }
-}
+Sort::Sort(std::initializer_list<int> initList) : elements(initList) {}
 
-Sort::Sort(int* arr, int count) {
-    for (int i = 0; i < count; i++) {
-        v.push_back(arr[i]);
+Sort::Sort(const std::vector<int>& vec, int count) {
+    for (int i = 0; i < count; ++i) {
+        elements.push_back(vec[i]);
     }
 }
 
 Sort::Sort(int count, ...) {
     va_list args;
     va_start(args, count);
-    for (int i = 0; i < count; i++) {
-        v.push_back(va_arg(args, int));
+    for (int i = 0; i < count; ++i) {
+        elements.push_back(va_arg(args, int));
     }
     va_end(args);
 }
 
-Sort::Sort(const char* str) {
-    stringstream ss(str);
-    int num;
-    char ch;
-    while (ss >> num) {
-        v.push_back(num);
-        ss >> ch;
+Sort::Sort(const std::string& str) {
+    std::stringstream ss(str);
+    int number;
+    char comma;
+    while (ss >> number) {
+        elements.push_back(number);
+        ss >> comma;
     }
 }
 
 void Sort::InsertSort(bool ascendent) {
-    int n = static_cast<int>(v.size());
-    for (int i = 1; i < n; i++) {
-        int key = v[i];
+    for (size_t i = 1; i < elements.size(); ++i) {
+        int key = elements[i];
         int j = i - 1;
-        while (j >= 0 && (ascendent ? v[j] > key : v[j] < key)) {
-            v[j + 1] = v[j];
-            j--;
+        while (j >= 0 && (ascendent ? elements[j] > key : elements[j] < key)) {
+            elements[j + 1] = elements[j];
+            j = j - 1;
         }
-        v[j + 1] = key;
+        elements[j + 1] = key;
     }
 }
 
+void Sort::QuickSort(bool ascendent) {
+    quickSortHelper(0, elements.size() - 1, ascendent);
+}
+
+void Sort::quickSortHelper(int low, int high, bool ascendent) {
+    if (low < high) {
+        int pi = partition(low, high, ascendent);
+        quickSortHelper(low, pi - 1, ascendent);
+        quickSortHelper(pi + 1, high, ascendent);
+    }
+}
+
+int Sort::partition(int low, int high, bool ascendent) {
+    int pivot = elements[high];
+    int i = low - 1;
+    for (int j = low; j < high; ++j) {
+        if (ascendent ? elements[j] < pivot : elements[j] > pivot) {
+            ++i;
+            std::swap(elements[i], elements[j]);
+        }
+    }
+    std::swap(elements[i + 1], elements[high]);
+    return i + 1;
+}
+
 void Sort::BubbleSort(bool ascendent) {
-    int n = static_cast<int>(v.size());
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (ascendent ? v[j] > v[j + 1] : v[j] < v[j + 1]) {
-                swap(v[j], v[j + 1]);
+    for (size_t i = 0; i < elements.size() - 1; ++i) {
+        for (size_t j = 0; j < elements.size() - i - 1; ++j) {
+            if (ascendent ? elements[j] > elements[j + 1] : elements[j] < elements[j + 1]) {
+                std::swap(elements[j], elements[j + 1]);
             }
         }
     }
 }
 
-void qSort(vector<int>& vec, int low, int high, bool asc) {
-    if (low >= high) return;
-    int pivot = vec[high], i = low;
-    for (int j = low; j < high; j++) {
-        if (asc ? vec[j] < pivot : vec[j] > pivot) {
-            swap(vec[i], vec[j]);
-            i++;
-        }
-    }
-    swap(vec[i], vec[high]);
-    qSort(vec, low, i - 1, asc);
-    qSort(vec, i + 1, high, asc);
-}
-
-void Sort::QuickSort(bool ascendent) {
-    if (v.size() > 0) {
-        qSort(v, 0, static_cast<int>(v.size()) - 1, ascendent);
-    }
-}
-
 void Sort::Print() {
-    int n = static_cast<int>(v.size());
-    for (int i = 0; i < n; i++) {
-        cout << v[i] << " ";
+    for (int elem : elements) {
+        std::cout << elem << " ";
     }
-    cout << endl;
+    std::cout << std::endl;
 }
 
 int Sort::GetElementsCount() {
-    return static_cast<int>(v.size());
+    return elements.size();
 }
 
 int Sort::GetElementFromIndex(int index) {
-    if (index >= 0 && index < static_cast<int>(v.size())) {
-        return v[index];
+    if (index >= 0 && static_cast<size_t>(index) < elements.size()) {
+        return elements[index];
     }
     return -1;
 }

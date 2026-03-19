@@ -17,9 +17,9 @@ public:
     Number(const char* value, int base);
     ~Number();
     Number(const Number& other);
-    Number(Number&& other) noexcept;
+    Number(Number&& other);
     Number& operator=(const Number& other);
-    Number& operator=(Number&& other) noexcept;
+    Number& operator=(Number&& other);
     Number& operator=(int value);
 
     void SwitchBase(int newBase);

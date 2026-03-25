@@ -2,12 +2,17 @@
 #include <iostream>
 using namespace std;
 
-Canvas::Canvas(int width, int height) : width(width), height(height) {
-    matrix = new char*[height];
-    for (int i = 0; i < height; ++i) {
-        matrix[i] = new char[width];
-        for (int j = 0; j < width; ++j) {
-            matrix[i][j] = ' ';
+Canvas::Canvas(int w, int h) {
+    width = w;  
+    height = h;
+
+    matrix = new char*[h]; 
+    for (int i = 0; i < h; i++) {
+        
+        matrix[i] = new char[w]; 
+
+        for (int j = 0; j < w; j++) {
+            matrix[i][j] = ' '; 
         }
     }
 }

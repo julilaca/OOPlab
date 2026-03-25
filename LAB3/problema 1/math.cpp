@@ -44,8 +44,8 @@ char* Math::Add(const char* str1, const char* str2) {
     if (str1 == nullptr || str2 == nullptr) {
         return nullptr;
     }
-    size_t len1 = strlen(str1);
-    size_t len2 = strlen(str2);
+    int len1 = strlen(str1);
+    int len2 = strlen(str2);
     char* result = new char[len1 + len2 + 1];
     strcpy(result, str1);
     strcat(result, str2);

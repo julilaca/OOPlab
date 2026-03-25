@@ -47,8 +47,8 @@ int Math::Add(int count, ...) {
 
 char* Math::Add(const char* a, const char* b) {
     if (!a || !b) return nullptr;
-    size_t lenA = std::strlen(a);
-    size_t lenB = std::strlen(b);
+    int lenA = std::strlen(a);
+    int lenB = std::strlen(b);
     char* result = new char[lenA + lenB + 1];
     std::strcpy(result, a);
     std::strcat(result, b);

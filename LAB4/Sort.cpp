@@ -11,7 +11,6 @@ Sort::Sort(int count, int min, int max) {
         elements.push_back(min + rand() % (max - min + 1));
     }
 }
-
 Sort::Sort(std::initializer_list<int> initList) : elements(initList) {}
 
 Sort::Sort(const std::vector<int>& vec, int count) {
@@ -38,7 +37,6 @@ Sort::Sort(const std::string& str) {
         ss >> comma;
     }
 }
-
 void Sort::InsertSort(bool ascendent) {
     for (size_t i = 1; i < elements.size(); ++i) {
         int key = elements[i];
@@ -50,7 +48,6 @@ void Sort::InsertSort(bool ascendent) {
         elements[j + 1] = key;
     }
 }
-
 void Sort::QuickSort(bool ascendent) {
     quickSortHelper(0, elements.size() - 1, ascendent);
 }
@@ -89,17 +86,12 @@ void Sort::BubbleSort(bool ascendent) {
 void Sort::Print() {
     for (int elem : elements) {
         std::cout << elem << " ";
-    }
-    std::cout << std::endl;
+    }  std::cout << std::endl;
 }
 
 int Sort::GetElementsCount() {
     return elements.size();
 }
-
 int Sort::GetElementFromIndex(int index) {
-    if (index >= 0 && static_cast<size_t>(index) < elements.size()) {
-        return elements[index];
-    }
-    return -1;
+  return elements[index];
 }

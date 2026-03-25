@@ -31,7 +31,7 @@ set_pixel(x, y, static_cast<char>(val));
     va_end(args);
 }
 
-void Canvas::print() const {
+void Canvas::print() {
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
             std::cout << grid[i][j];

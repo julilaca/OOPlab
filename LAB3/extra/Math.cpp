@@ -45,12 +45,15 @@ int Math::Add(int count, ...) {
     return sum;
 }
 
-char* Math::Add(const char* a, const char* b) {
-    if (!a || !b) return nullptr;
-    int lenA = std::strlen(a);
-    int lenB = std::strlen(b);
-    char* result = new char[lenA + lenB + 1];
-    std::strcpy(result, a);
-    std::strcat(result, b);
+char* Math::Add(const char* str1, const char* str2) {
+    if (str1 == nullptr || str2 == nullptr) {
+        return nullptr;
+    }
+    int len1 = strlen(str1);
+    int len2 = strlen(str2);
+    char* result = new char[len1 + len2 + 1];
+    strcpy(result, str1);
+    strcat(result, str2);
     return result;
 }
+

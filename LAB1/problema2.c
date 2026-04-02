@@ -26,7 +26,7 @@ int main() {
             int len2 = strlen(words[j + 1]);
             int shouldSwap = 0;
 
-            if (len1 < len2) {
+            if (len1 > len2) {
                 shouldSwap = 1;
             } else if (len1 == len2) {
                 if (strcmp(words[j], words[j + 1]) > 0) {

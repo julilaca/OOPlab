@@ -3,43 +3,44 @@
 #include <cstdlib>
 #include <cmath>
 
-Number::Number(const char* value, int base) : base(base)
+Number::Number(const char* value, int base)
 {
-    this->value = new char[strlen(value) + 1];
-    strcpy(this->value, value);
+    this->base = base;
+    str = new char[strlen(value) + 1];
+    strcpy(str, value);
     UpdateDecimal();
 }
 
 Number::~Number()
 {
-    delete[] value;
+    delete[] str;
 }
 
 Number::Number(const Number& other)
 {
     base = other.base;
     decimalValue = other.decimalValue;
-    value = new char[strlen(other.value) + 1];
-    strcpy(value, other.value);
+    str = new char[strlen(other.str) + 1];
+    strcpy(str, other.str);
 }
 
 Number::Number(Number&& other) 
 {
     base = other.base;
     decimalValue = other.decimalValue;
-    value = other.value;
-    other.value = nullptr;
+    str = other.str;
+    other.str = nullptr;
 }
 
 Number& Number::operator=(const Number& other)
 {
     if (this != &other)
     {
-        delete[] value;
+        delete[] str;
         base = other.base;
         decimalValue = other.decimalValue;
-        value = new char[strlen(other.value) + 1];
-        strcpy(value, other.value);
+        str = new char[strlen(other.str) + 1];
+        strcpy(str, other.str);
     }
     return *this;
 }
@@ -48,18 +49,20 @@ Number& Number::operator=(Number&& other)
 {
     if (this != &other)
     {
-        delete[] value;
+        delete[] str;
         base = other.base;
         decimalValue = other.decimalValue;
-        value = other.value;
-        other.value = nullptr;
+        str = other.str;
+        other.str = nullptr;
     }
-    return *this;   }
+    return *this;
+}
+
 Number& Number::operator=(int value)
 {
-    delete[] this->value;
-    this->value = new char[32];
-    itoa(value, this->value, 10);
+    delete[] str;
+    str = new char[32];
+    itoa(value, str, 10);
     base = 10;
     decimalValue = value;
     return *this;
@@ -67,15 +70,15 @@ Number& Number::operator=(int value)
 
 void Number::UpdateDecimal()
 {
-    decimalValue = strtol(value, nullptr, base);
+    decimalValue = strtol(str, nullptr, base);
 }
 
 void Number::UpdateString(int newBase)
 {
     if (newBase == base) return;
-    delete[] value;
-    value = new char[32];
-    itoa(decimalValue, value, newBase);
+    delete[] str;
+    str = new char[32];
+    itoa(decimalValue, str, newBase);
     base = newBase;
 }
 
@@ -87,22 +90,23 @@ void Number::SwitchBase(int newBase)
 
 void Number::Print()
 {
-    std::cout << value << std::endl;
+    std::cout << str << std::endl;
 }
 
 int Number::GetDigitsCount()
 {
-    return strlen(value);
+    return strlen(str);
 }
 
 int Number::GetBase()
 {
-    return base; }
+    return base; 
+}
 
 char Number::operator[](int index)
 {
     if (index < 0 || index >= GetDigitsCount()) return '\0';
-    return value[index];
+    return str[index];
 }
 
 Number operator+(const Number& n1, const Number& n2)
@@ -170,7 +174,13 @@ Number& Number::operator--()
         UpdateString(base);
         return *this;
     }
-    memmove(value, value + 1, GetDigitsCount());
+    
+    int len = GetDigitsCount();
+    for (int i = 0; i < len; i++) 
+    {
+        str[i] = str[i + 1]; 
+    }
+    
     UpdateDecimal();
     return *this;
 }
@@ -184,7 +194,7 @@ Number Number::operator--(int)
         UpdateString(base);
         return temp;
     }
-    value[GetDigitsCount() - 1] = '\0';
+    str[GetDigitsCount() - 1] = '\0';
     UpdateDecimal();
     return temp;
 }

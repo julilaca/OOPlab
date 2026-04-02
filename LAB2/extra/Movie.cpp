@@ -39,5 +39,5 @@ int Movie::get_length() {
 int Movie::get_passed_years() {
     time_t t = time(nullptr);
     tm *now = localtime(&t);
-    return (*now).tm_year + 1900 - year; 
+    return now->tm_year + 1900 - year; 
 }

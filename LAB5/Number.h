@@ -7,7 +7,7 @@
 class Number
 {
 private:
-    char* value;
+    char* str;
     int base;
     int decimalValue;
     void UpdateDecimal();

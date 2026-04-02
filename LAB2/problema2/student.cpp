@@ -61,8 +61,8 @@ int compareByEnglishGrade(Student& s1, Student& s2) {
     return 0;
 }
 
-int compareByHistoryGrade(Student& s1, Student& s2) {
-    if (s1.getHistoryGrade() > s2.getHistoryGrade()) return 1;
+int compareByHistoryGrade(Student* s1, Student& s2) {
+    if (s1->getHistoryGrade() > s2.getHistoryGrade()) return 1;
     if (s1.getHistoryGrade() < s2.getHistoryGrade()) return -1;
     return 0;
 }

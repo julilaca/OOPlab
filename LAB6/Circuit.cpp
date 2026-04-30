@@ -1,44 +1,61 @@
 #include "Circuit.h"
-#include <algorithm>
 #include <iostream>
+#include <algorithm>
 
-void Circuit::SetLength(double length) { this->length = length; }
-void Circuit::SetWeather(Weather weather) { this->weather = weather; }
-void Circuit::AddCar(Car* car) { cars.push_back(car); }
+bool CompareRaceResults(const std::pair<Car*, float>& a, const std::pair<Car*, float>& b) {
+    return a.second < b.second;
+}
+
+Circuit::Circuit() : length(0), weather(Weather::Sunny) {}
+
+Circuit::~Circuit() {
+    for (Car* car : cars) {
+        delete car;
+    }
+}
+
+void Circuit::SetLength(int l) {
+    length = l;
+}
+
+void Circuit::SetWeather(Weather w) {
+    weather = w;
+}
+
+void Circuit::AddCar(Car* car) {
+    cars.push_back(car);
+}
 
 void Circuit::Race() {
-    raceResults.clear();
+    results.clear();
     didNotFinish.clear();
 
     for (Car* car : cars) {
-        if (car->CanFinish(length)) {
-            double time = car->CalculateTime(length, weather);
-            raceResults.emplace_back(car, time);
+        float speed = car->GetAverageSpeed(weather);
+        float maxDistance = car->GetFuelCapacity() / car->GetFuelConsumption() * 100;
+
+        if (maxDistance >= length) {
+            float time = length / speed;
+            results.push_back({car, time});
         } else {
             didNotFinish.push_back(car);
         }
     }
 
-    std::sort(raceResults.begin(), raceResults.end(),
-        [](const auto& a, const auto& b) { return a.second < b.second; });
+    std::sort(results.begin(), results.end(), CompareRaceResults);
 }
 
 void Circuit::ShowFinalRanks() const {
-    std::cout << "final rankings:\n";
-    for (size_t i = 0; i < raceResults.size(); ++i) {
-        std::cout << i + 1 << ". " << raceResults[i].first->GetName()
-                  << " time: " << raceResults[i].second << " hours\n";
+    std::cout << "final ranks:\n";
+    for (size_t i = 0; i < results.size(); i++) {
+        std::cout << i + 1 << ". " << results[i].first->GetCarName() 
+                  << " finished in " << results[i].second << " hours.\n";
     }
 }
 
 void Circuit::ShowWhoDidNotFinish() const {
-    if (didNotFinish.empty()) {
-        std::cout << "all cars finished the race\n";
-        return;
-    }
-
-    std::cout << "cars that did not finish\n";
-    for (const Car* car : didNotFinish) {
-        std::cout << "- " << car->GetName() << "\n";
+    std::cout << "cars that did not finish:\n";
+    for (Car* car : didNotFinish) {
+        std::cout << car->GetCarName() << " ran out of fuel.\n";
     }
 }

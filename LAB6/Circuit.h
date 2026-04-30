@@ -1,21 +1,26 @@
-#pragma once
+#ifndef CIRCUIT_H
+#define CIRCUIT_H
+
 #include "Car.h"
-#include "Weather.h"
 #include <vector>
 
 class Circuit {
 private:
-    double length;
+    int length;
     Weather weather;
     std::vector<Car*> cars;
-    std::vector<std::pair<Car*, double>> raceResults;
+    std::vector<std::pair<Car*, float>> results; 
     std::vector<Car*> didNotFinish;
 
 public:
-    void SetLength(double length);
-    void SetWeather(Weather weather);
+    Circuit();
+    ~Circuit();
+    void SetLength(int l);
+    void SetWeather(Weather w);
     void AddCar(Car* car);
     void Race();
     void ShowFinalRanks() const;
     void ShowWhoDidNotFinish() const;
 };
+
+#endif 

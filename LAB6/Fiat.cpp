@@ -1,24 +1,14 @@
 #include "Fiat.h"
 
 Fiat::Fiat() {
-    fuelCapacity = 40.0;
-    fuelConsumption = 6.5;
-    avgSpeedRain = 60.0;
-    avgSpeedSunny = 85.0;
-    avgSpeedSnow = 50.0;
-    currentFuel = fuelCapacity;
+    fuelCapacity = 60;
+    fuelConsumption = 8;
+    averageSpeed[0] = 30; // rain
+    averageSpeed[1] = 50; // sun
+    averageSpeed[2] = 20; // snow
 }
 
-double Fiat::GetFuelCapacity() const { return fuelCapacity; }
-double Fiat::GetFuelConsumption() const { return fuelConsumption; }
-
-double Fiat::GetAverageSpeed(Weather weather) const {
-    switch (weather) {
-        case Weather::Rain: return avgSpeedRain;
-        case Weather::Sunny: return avgSpeedSunny;
-        case Weather::Snow: return avgSpeedSnow;
-    }
-    return 0;
-}
-
-const char* Fiat::GetName() const { return "Fiat"; }
+float Fiat::GetFuelCapacity() { return fuelCapacity; }
+float Fiat::GetFuelConsumption() { return fuelConsumption; }
+float Fiat::GetAverageSpeed(Weather weather) { return averageSpeed[(int)weather]; }
+const char* Fiat::GetCarName() { return "Fiat"; }

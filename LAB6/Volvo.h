@@ -1,11 +1,15 @@
-#pragma once
+#ifndef VOLVO_H
+#define VOLVO_H
+
 #include "Car.h"
 
 class Volvo : public Car {
 public:
     Volvo();
-    double GetFuelCapacity() const override;
-    double GetFuelConsumption() const override;
-    double GetAverageSpeed(Weather weather) const override;
-    const char* GetName() const override;
+    float GetFuelCapacity() ;
+    float GetFuelConsumption() ;
+    float GetAverageSpeed(Weather weather) ;
+    const char* GetCarName() ;
 };
+
+#endif 

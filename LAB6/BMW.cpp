@@ -1,24 +1,14 @@
 #include "BMW.h"
 
 BMW::BMW() {
-    fuelCapacity = 55.0;
-    fuelConsumption = 9.0;
-    avgSpeedRain = 80.0;
-    avgSpeedSunny = 130.0;
-    avgSpeedSnow = 65.0;
-    currentFuel = fuelCapacity;
+    fuelCapacity = 60;
+    fuelConsumption = 8;
+    averageSpeed[0] = 100; // rain
+    averageSpeed[1] = 150; // sun
+    averageSpeed[2] = 85;  // snow
 }
 
-double BMW::GetFuelCapacity() const { return fuelCapacity; }
-double BMW::GetFuelConsumption() const { return fuelConsumption; }
-
-double BMW::GetAverageSpeed(Weather weather) const {
-    switch (weather) {
-        case Weather::Rain: return avgSpeedRain;
-        case Weather::Sunny: return avgSpeedSunny;
-        case Weather::Snow: return avgSpeedSnow;
-    }
-    return 0;
-}
-
-const char* BMW::GetName() const { return "BMW"; }
+float BMW::GetFuelCapacity()  { return fuelCapacity; }
+float BMW::GetFuelConsumption()  { return fuelConsumption; }
+float BMW::GetAverageSpeed(Weather weather)  { return averageSpeed[(int)weather]; }
+ const char* BMW::GetCarName()  { return "Bmw"; }

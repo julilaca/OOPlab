@@ -1,11 +1,15 @@
-#pragma once
+#ifndef BMW_H
+#define BMW_H
+
 #include "Car.h"
 
 class BMW : public Car {
 public:
     BMW();
-    double GetFuelCapacity() const override;
-    double GetFuelConsumption() const override;
-    double GetAverageSpeed(Weather weather) const override;
-    const char* GetName() const override;
+    float GetFuelCapacity() ;
+    float GetFuelConsumption();
+    float GetAverageSpeed(Weather weather);
+ const char* GetCarName();
 };
+
+#endif

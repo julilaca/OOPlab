@@ -23,6 +23,7 @@ Sort::Sort(vector<int>& vec, int count) {
     }
 }
 
+// n1.(5,4,5,6,6,6)
 Sort::Sort(int count, ...) {
     va_list args;
     va_start(args, count);
@@ -42,24 +43,27 @@ Sort::Sort(const string& str) {
         ss >> comma;
     }
 }
-
+// 5 1 2 6
+//temp = 1
+// 5 5 2 6
 void Sort::InsertSort(bool ascendent) {
     for (int i = 1; i < elements.size(); i++) {
-        int key = elements[i];
+        int temp = elements[i];
         int j = i - 1;
 
-        if (ascendent) {
-            while (j >= 0 && elements[j] > key) {
-                elements[j + 1] = elements[j];
-                j--;
-            }
-        } else {
-            while (j >= 0 && elements[j] < key) {
-                elements[j + 1] = elements[j];
-                j--;
-            }
-        }
-elements[j + 1] = key;
+        while (j >= 0) {
+    if (ascendent && elements[j] > temp) {
+        elements[j + 1] = elements[j];
+    }
+    else if (!ascendent && elements[j] < temp) {
+        elements[j + 1] = elements[j];
+    }
+    else {
+        break;
+    }
+    j--;
+}
+elements[j + 1] = temp;
     }
 }
 

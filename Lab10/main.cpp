@@ -2,13 +2,13 @@
 #include <exception>
 using namespace std;
 
-class IndexOutOfBounds : public exception {
+class exception1 : public exception {
     virtual const char* what() const throw() {
         return "index out of bounds";
     }
 };
 
-class ArrayFull : public exception {
+class exception2 : public exception {
     virtual const char* what() const throw() {
         return "array full";
     }
@@ -61,18 +61,18 @@ public:
     }
 
     T& operator[](int index) {
-        if (index < 0 || index >= Size) throw IndexOutOfBounds();
+        if (index < 0 || index >= Size) throw exception1();
         return *List[index];
     }
 
     const Array<T>& operator+=(const T& newElem) {
-        if (Size >= Capacity) throw ArrayFull();
+        if (Size >= Capacity) throw exception2();
         List[Size++] = new T(newElem);
         return *this;
     }
 
     const Array<T>& Insert(int index, const T& newElem) {
-        if (index < 0 || index > Size || Size >= Capacity) throw IndexOutOfBounds();
+        if (index < 0 || index > Size || Size >= Capacity) throw exception1();
         for (int i = Size; i > index; i--) List[i] = List[i - 1];
         List[index] = new T(newElem);
         ++Size;
@@ -80,7 +80,7 @@ public:
     }
 
     const Array<T>& Insert(int index, const Array<T> otherArray) {
-        if (index < 0 || index > Size || Size + otherArray.Size > Capacity) throw IndexOutOfBounds();
+        if (index < 0 || index > Size || Size + otherArray.Size > Capacity) throw exception1();
         for (int i = Size - 1; i >= index; i--) List[i + otherArray.Size] = List[i];
         for (int j = 0; j < otherArray.Size; j++) List[index + j] = new T(*otherArray.List[j]);
         Size += otherArray.Size;
@@ -88,7 +88,7 @@ public:
     }
 
     const Array<T>& Delete(int index) {
-        if (index < 0 || index >= Size) throw IndexOutOfBounds();
+        if (index < 0 || index >= Size) throw exception1();
         delete List[index];
         for (int i = index; i < Size - 1; i++) List[i] = List[i + 1];
         List[--Size] = nullptr;
@@ -143,7 +143,7 @@ public:
 
     int BinarySearch(const T& elem, int(*compare)(const T&, const T&)) {
         int left = 0, right = Size - 1;
-        while (left <= right) {
+while (left <= right) {
             int mid = (left + right) / 2;
             int cmp = compare(*List[mid], elem);
             if (cmp == 0) return mid;
@@ -153,7 +153,7 @@ public:
         return -1;
     }
 
-    int BinarySearch(const T& elem, Compare* comparator) {
+ int BinarySearch(const T& elem, Compare* comparator) {
         int left = 0, right = Size - 1;
         while (left <= right) {
             int mid = (left + right) / 2;
@@ -176,7 +176,8 @@ public:
     }
 
     int Find(const T& elem, Compare* comparator) {
-        for (int i = 0; i < Size; i++) if (comparator->CompareElements(List[i], (void*)&elem) == 0) return i;
+        for (int i = 0; i < Size; i++) 
+        if (comparator->CompareElements(List[i], (void*)&elem) == 0) return i;
         return -1;
     }
 
@@ -189,22 +190,22 @@ public:
 
 int main() {
     Array<int> arr(3);
+
     try {
         arr += 10;
         arr += 20;
         arr += 30;
-        arr += 40;
+        arr += 40; 
     }
     catch (exception& e) {
-        cout << "exception: " << e.what() << endl;
+        cout << "exception- " << e.what() << endl;
     }
 
     try {
-        cout << "index 1: " << arr[1] << endl;
-        cout << "index 5: " << arr[5] << endl;
+        cout << arr[5] << endl; 
     }
     catch (exception& e) {
-        cout << "exception" << e.what() << endl;
+        cout << "exception- " << e.what() << endl;
     }
 
     return 0;

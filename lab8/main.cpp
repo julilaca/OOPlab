@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <map>
+#include <vector>
 #include <queue>
 #include <cctype>
 
@@ -11,7 +12,7 @@ vector<string> splitString(const string& str) {
     vector<string> words;
     string current;
     for (char ch : str) {
-        if (isspace(ch) || ch == ',' || ch == '?' || ch == '!' || ch == '.') {
+        if (ch == ' ' || ch == ',' || ch == '?' || ch == '!' || ch == '.') {
             if (!current.empty()) {
                 words.push_back(current);
                 current.clear();
@@ -26,8 +27,8 @@ vector<string> splitString(const string& str) {
 
 struct Comparator {
     bool operator()(const pair<string, int>& a, const pair<string, int>& b) {
-        if (a.second != b.second) return a.second < b.second;
-        return a.first > b.first;
+        if (a.second != b.second) return a.second > b.second;
+        return a.first < b.first;
     }
 };
 
@@ -41,12 +42,12 @@ int main() {
     map<string, int> counts;
     for (const auto& word : words) counts[word]++;
 
-    priority_queue<pair<string, int>, vector<pair<string, int>>, Comparator> pq;
-    for (const auto& pair : counts) pq.push(pair);
+    priority_queue<pair<string, int>, vector<pair<string, int>>, Comparator> priorityq;
+    for (const auto& pair : counts) priorityq.push(pair);
 
-    while (!pq.empty()) {
-        auto top = pq.top();
+    while (!priorityq.empty()) {
+        auto top = priorityq.top();
         cout << top.first << " => " << top.second << endl;
-        pq.pop();
+        priorityq.pop();
     }
 }

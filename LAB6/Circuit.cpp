@@ -47,7 +47,7 @@ void Circuit::Race() {
 
 void Circuit::ShowFinalRanks() const {
     std::cout << "final ranks:\n";
-    for (size_t i = 0; i < results.size(); i++) {
+    for (int i = 0; i < results.size(); i++) {
         std::cout << i + 1 << ". " << results[i].first->GetCarName() 
                   << " finished in " << results[i].second << " hours.\n";
     }

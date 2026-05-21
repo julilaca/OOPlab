@@ -2,8 +2,8 @@
 #include "tree.h"
 
 int main() {
-    float a = 300.0_Kelvin;
-    float b = 120.0_Fahrenheit;
+    float a = 300_Kelvin;
+    float b = 120_Fahrenheit;
     std::cout << a << " " << b << "\n";
 
     Tree<int> tree;

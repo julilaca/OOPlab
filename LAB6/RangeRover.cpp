@@ -3,7 +3,7 @@
 RangeRover::RangeRover() {
     fuelCapacity = 60;
     fuelConsumption = 8;
-    averageSpeed[0] = 120; // rain
+    averageSpeed[0] = 10; // rain
     averageSpeed[1] = 130; // sun
     averageSpeed[2] = 90; // snow
 }
